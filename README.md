@@ -10,16 +10,38 @@ Key Features🔐
 Secure Identity: User registration with industry-standard BCrypt password hashing.💸 P2P Transfers: Atomic peer-to-peer money transfers using @Transactional to ensure ACID compliance (all-or-nothing execution).🛡️ Concurrency Control: Implemented Optimistic Locking (@Version) to prevent "Double Spending" attacks during simultaneous requests.🐳 Dockerized Database: Zero-config database setup using Docker containers.📜 Audit Logging: Automatic immutable transaction history for every deposit and transfer.🏗️ Layered Architecture: Clean separation of concerns (Controller → Service → Repository → Model).
 
 🛠️ Setup & Installation
-Prerequisites: Java 21 or higherDocker Desktop (running)Maven1. Clone the RepositoryBashgit clone https://github.com/Yashwanth-9433/VaultPay.git
+Prerequisites: Java 21 or higherDocker Desktop (running)Maven
+
+1. Clone the RepositoryBashgit clone https://github.com/Yashwanth-9433/VaultPay.git
 cd VaultPay
+
 2. Start the Database (Docker)Run this command to spin up the PostgreSQL container:Bashdocker run --name vaultpay-postgres \
   -e POSTGRES_USER=yash \
   -e POSTGRES_PASSWORD=password \
   -e POSTGRES_DB=vaultpay_db \
   -p 5432:5432 \
   -d postgres:16
+
 3. Run the ApplicationBash./mvnw spring-boot:run
-The application will start on http://localhost:8080.🔌 API EndpointsMethodEndpointDescriptionPOST/api/auth/registerRegister a new user & auto-create walletPOST/api/account/depositDeposit money into an accountPOST/api/account/transferSecurely transfer money to another userGET/api/account/{id}/transactionsView transaction history (Passbook)🧠 System Design HighlightsDatabase SchemaUsers: Stores identity credentials (hashed passwords).Accounts: Stores balance and optimistic lock version.Relation: One-to-One with Users.Transactions: Immutable ledger of all money movement.Relation: Linked to Sender and Receiver Account IDs.Handling ConcurrencyTo prevent race conditions (e.g., two transfers happening at the exact same millisecond), the Account entity uses JPA Optimistic Locking:Java@Version
+The application will start on http://localhost:8080.
+
+🔌 API EndpointsMethodEndpointDescriptionPOST/api/auth/registerRegister a new user & auto-create walletPOST/api/account/depositDeposit money into an accountPOST/api/account/transferSecurely transfer money to another userGET/api/account/{id}/transactions
+
+View transaction history (Passbook)
+
+🧠 System Design Highlights
+
+Database Schema
+
+Users: Stores identity credentials (hashed passwords).
+
+Accounts: Stores balance and optimistic lock version.
+Relation: One-to-One with Users.
+
+Transactions: Immutable ledger of all money movement.
+Relation: Linked to Sender and Receiver Account IDs.Handling Concurrency
+
+To prevent race conditions (e.g., two transfers happening at the exact same millisecond), the Account entity uses JPA Optimistic Locking:Java@Version
 private Long version;
 If two threads try to update the balance simultaneously, one will fail safely with an OptimisticLockException, preserving data integrity.
 
