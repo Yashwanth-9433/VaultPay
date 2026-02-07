@@ -1,4 +1,5 @@
 🏦 VaultPay - Digital Wallet Backend
+
 A high-performance, ACID-compliant banking backend built with Spring Boot, PostgreSQL, and Docker.VaultPay is a robust RESTful API that handles secure peer-to-peer money transfers, account management, and transaction logging. It is designed to handle concurrency and ensure data integrity in financial transactions.
 
 🚀 Tech Stack 
@@ -20,4 +21,11 @@ cd VaultPay
 3. Run the ApplicationBash./mvnw spring-boot:run
 The application will start on http://localhost:8080.🔌 API EndpointsMethodEndpointDescriptionPOST/api/auth/registerRegister a new user & auto-create walletPOST/api/account/depositDeposit money into an accountPOST/api/account/transferSecurely transfer money to another userGET/api/account/{id}/transactionsView transaction history (Passbook)🧠 System Design HighlightsDatabase SchemaUsers: Stores identity credentials (hashed passwords).Accounts: Stores balance and optimistic lock version.Relation: One-to-One with Users.Transactions: Immutable ledger of all money movement.Relation: Linked to Sender and Receiver Account IDs.Handling ConcurrencyTo prevent race conditions (e.g., two transfers happening at the exact same millisecond), the Account entity uses JPA Optimistic Locking:Java@Version
 private Long version;
-If two threads try to update the balance simultaneously, one will fail safely with an OptimisticLockException, preserving data integrity.🔮 Future Enhancements[ ] Implement JWT (JSON Web Tokens) for stateless authentication.[ ] Add Unit Tests using JUnit 5 and Mockito.[ ] Build a React/Angular Frontend dashboard.👤 AuthorYashwanth LLinkedIn: linkedin.com/in/yashwanthnarayananGitHub: github.com/Yashwanth-9433
+If two threads try to update the balance simultaneously, one will fail safely with an OptimisticLockException, preserving data integrity.
+
+🔮 Future Enhancements[IN PROGRESS] 
+Implement JWT (JSON Web Tokens) for stateless authentication.[ ] Add Unit Tests using JUnit 5 and Mockito.[ ] Build a React/Angular Frontend dashboard.
+
+👤 Author
+Yashwanth LinkedIn: linkedin.com/in/yashwanthnarayanan
+GitHub: github.com/Yashwanth-9433
