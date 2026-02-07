@@ -1,4 +1,15 @@
-🏦 VaultPay - Digital Wallet BackendA high-performance, ACID-compliant banking backend built with Spring Boot, PostgreSQL, and Docker.VaultPay is a robust RESTful API that handles secure peer-to-peer money transfers, account management, and transaction logging. It is designed to handle concurrency and ensure data integrity in financial transactions.🚀 Tech StackCore: Java 21, Spring Boot 3.4Database: PostgreSQL 16 (Containerized)ORM: Hibernate / Spring Data JPASecurity: Spring Security, BCrypt HashingDevOps: Docker, Docker ComposeBuild Tool: Maven⚡ Key Features🔐 Secure Identity: User registration with industry-standard BCrypt password hashing.💸 P2P Transfers: Atomic peer-to-peer money transfers using @Transactional to ensure ACID compliance (all-or-nothing execution).🛡️ Concurrency Control: Implemented Optimistic Locking (@Version) to prevent "Double Spending" attacks during simultaneous requests.🐳 Dockerized Database: Zero-config database setup using Docker containers.📜 Audit Logging: Automatic immutable transaction history for every deposit and transfer.🏗️ Layered Architecture: Clean separation of concerns (Controller → Service → Repository → Model).🛠️ Setup & InstallationPrerequisitesJava 21 or higherDocker Desktop (running)Maven1. Clone the RepositoryBashgit clone https://github.com/Yashwanth-9433/VaultPay.git
+🏦 VaultPay - Digital Wallet Backend
+A high-performance, ACID-compliant banking backend built with Spring Boot, PostgreSQL, and Docker.VaultPay is a robust RESTful API that handles secure peer-to-peer money transfers, account management, and transaction logging. It is designed to handle concurrency and ensure data integrity in financial transactions.
+
+🚀 Tech Stack 
+Core: Java 21, Spring Boot 3.4
+Database: PostgreSQL 16 (Containerized)ORM: Hibernate / Spring Data JPASecurity: Spring Security, BCrypt HashingDevOps: Docker, Docker ComposeBuild Tool: Maven⚡ 
+
+Key Features🔐 
+Secure Identity: User registration with industry-standard BCrypt password hashing.💸 P2P Transfers: Atomic peer-to-peer money transfers using @Transactional to ensure ACID compliance (all-or-nothing execution).🛡️ Concurrency Control: Implemented Optimistic Locking (@Version) to prevent "Double Spending" attacks during simultaneous requests.🐳 Dockerized Database: Zero-config database setup using Docker containers.📜 Audit Logging: Automatic immutable transaction history for every deposit and transfer.🏗️ Layered Architecture: Clean separation of concerns (Controller → Service → Repository → Model).
+
+🛠️ Setup & Installation
+Prerequisites: Java 21 or higherDocker Desktop (running)Maven1. Clone the RepositoryBashgit clone https://github.com/Yashwanth-9433/VaultPay.git
 cd VaultPay
 2. Start the Database (Docker)Run this command to spin up the PostgreSQL container:Bashdocker run --name vaultpay-postgres \
   -e POSTGRES_USER=yash \
